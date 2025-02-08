@@ -2,6 +2,7 @@ package db.learnDB;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -49,5 +50,15 @@ public class DatabaseManager extends SQLiteOpenHelper  {
             Toast.makeText(context, "book added", Toast.LENGTH_SHORT).show();
         }
         db.close();
+    }
+
+    Cursor getBooks(){
+        String query = "SELECT * FROM " + BOOK_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }
